@@ -23,7 +23,7 @@ $(function () {
             dataType: "json",
             contentType: "application/json",//应用类型/json
             success: function (data) {
-                alert(data.mname);
+                //alert(data.mname);
                 //先添加所有的主材单
                 $.each(data, function (i, obj) {
                     var  content='<li class="layui-nav-item">';
@@ -108,7 +108,7 @@ $(function () {
         body > div > div.layui-side.layui-bg-black.kit-side > div > ul > li:nth-child(3) > dl > dd.layui-this > a*/
         $(document).on('click','body div div.layui-side.layui-bg-black.kit-side div ul li.layui-nav-item.layui-nav-itemed dl dd a',function () {
             var dataid = $(this);
-            alert(dataid);
+            //alert(dataid);
             //这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
             if ($(".layui-tab-title li[lay-id]").length <= 0) {
                 //如果比零小，则直接打开新的tab项

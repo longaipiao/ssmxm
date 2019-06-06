@@ -15,10 +15,11 @@
     <result column="voyage" property="voyage" jdbcType="VARCHAR" />
     <result column="train" property="train" jdbcType="VARCHAR" />
     <result column="lserial" property="lserial" jdbcType="VARCHAR" />
+    <result column="lstate" property="lstate" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     lid, lstart, lend, startdate, enddate, lnote, lweight, trunksize, trains, lway, voyage, 
-    train, lserial
+    train, lserial,lstate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -32,20 +33,17 @@
     <select id="getLineAll" resultType="com.zking.ssm.model.Line" parameterType="com.zking.ssm.model.Line">
       select
       <include refid="Base_Column_List" />
-      from t_line
-      where 1 = 1
-      <if test="lstart != null">
+      from t_line where 1 = 1
+      <if test="lstart!=null">
         and lstart like '%${lstart}%'
       </if>
-      <if test="lend != null">
+      <if test="lend!=null">
         and lend like '%${lend}%'
       </if>
-
-      <if test="startdate != null">
+      <if test="startdate!=null">
         and startdate like '%${startdate}%'
       </if>
-
-      <if test="enddate != null">
+      <if test="enddate!=null">
         and enddate like '%${enddate}%'
       </if>
     </select>
@@ -58,23 +56,50 @@
     where lid = #{lid}
   </select>
 
+  <!--后台查询所有线路的方法带模糊查询的-->
+  <select id="getThLineAll" resultType="com.zking.ssm.model.Line" parameterType="com.zking.ssm.model.Line">
+    select
+        <include refid="Base_Column_List" />
+    from t_line where 1 = 1
+    <if test="lstart!=null">
+      and lstart like '%${lstart}%'
+    </if>
+    <if test="lend!=null">
+      and lend like '%${lend}%'
+    </if>
+    <if test="startdate!=null">
+      and startdate like '%${startdate}%'
+    </if>
+    <if test="enddate!=null">
+      and enddate like '%${enddate}%'
+    </if>
+  </select>
+
+
+  <!--增加线路的方法-->
+  <insert id="addLine" parameterType="com.zking.ssm.model.Line" >
+    insert into t_line (lid, lstart, lend,
+      startdate, enddate, lnote,
+      lweight, trunksize, trains,
+      lway, voyage, train,
+      lserial)
+    values (#{lid,jdbcType=VARCHAR}, #{lstart,jdbcType=VARCHAR}, #{lend,jdbcType=VARCHAR},
+      #{startdate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{lnote,jdbcType=VARCHAR},
+      #{lweight,jdbcType=INTEGER}, #{trunksize,jdbcType=INTEGER}, #{trains,jdbcType=VARCHAR},
+      #{lway,jdbcType=VARCHAR}, #{voyage,jdbcType=VARCHAR}, #{train,jdbcType=VARCHAR},
+      #{lserial,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_line
     where lid = #{lid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zking.ssm.model.Line" >
-    insert into t_line (lid, lstart, lend, 
-      startdate, enddate, lnote, 
-      lweight, trunksize, trains, 
-      lway, voyage, train, 
-      lserial)
-    values (#{lid,jdbcType=VARCHAR}, #{lstart,jdbcType=VARCHAR}, #{lend,jdbcType=VARCHAR}, 
-      #{startdate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{lnote,jdbcType=VARCHAR}, 
-      #{lweight,jdbcType=INTEGER}, #{trunksize,jdbcType=INTEGER}, #{trains,jdbcType=VARCHAR}, 
-      #{lway,jdbcType=VARCHAR}, #{voyage,jdbcType=VARCHAR}, #{train,jdbcType=VARCHAR}, 
-      #{lserial,jdbcType=VARCHAR})
-  </insert>
+
+
   <insert id="insertSelective" parameterType="com.zking.ssm.model.Line" >
     insert into t_line
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -160,6 +185,8 @@
       </if>
     </trim>
   </insert>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Line" >
     update t_line
     <set >
@@ -202,7 +229,8 @@
     </set>
     where lid = #{lid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Line" >
+  <!--修改的方法-->
+  <update id="updateByLid" parameterType="com.zking.ssm.model.Line" >
     update t_line
     set lstart = #{lstart,jdbcType=VARCHAR},
       lend = #{lend,jdbcType=VARCHAR},
@@ -217,5 +245,14 @@
       train = #{train,jdbcType=VARCHAR},
       lserial = #{lserial,jdbcType=VARCHAR}
     where lid = #{lid,jdbcType=VARCHAR}
+  </update>
+
+  <!--运营的方法   状态为1-->
+  <update id="updateline1" parameterType="string">
+    update t_line set lstate = 1 where lid = #{lid}
+  </update>
+  <!--停止运营的方法   状态为2-->
+  <update id="updateline2" parameterType="string">
+    update t_line set lstate = 2 where lid = #{lid}
   </update>
 </mapper>
