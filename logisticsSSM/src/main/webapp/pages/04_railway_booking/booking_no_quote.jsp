@@ -266,8 +266,7 @@
         <table class="table_A">
             <tr>
                 <td>
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要本公司提货</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要本公司送货</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input id="checkbox"  class="form_checkbox" type="checkbox"/>&nbsp;是否需要本公司提送货</label>
                 </td>
             </tr>
 

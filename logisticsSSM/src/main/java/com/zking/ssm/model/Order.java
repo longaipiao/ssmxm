@@ -21,6 +21,12 @@ public class Order implements Serializable {
 
     private String lid;
 
+    private String sid;
+
+    private String rid;
+
+    private String gid;
+
     private String oaddress;
 
     private Integer thstate;
@@ -127,6 +133,31 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getRid() {
+        return rid;
+    }
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+
     @Override
     public String toString() {
         return "Order{" +
@@ -138,6 +169,9 @@ public class Order implements Serializable {
                 ", ostate=" + ostate +
                 ", price=" + price +
                 ", lid='" + lid + '\'' +
+                ", sid='" + sid + '\'' +
+                ", rid='" + rid + '\'' +
+                ", gid='" + gid + '\'' +
                 ", oaddress='" + oaddress + '\'' +
                 ", thstate=" + thstate +
                 '}';
