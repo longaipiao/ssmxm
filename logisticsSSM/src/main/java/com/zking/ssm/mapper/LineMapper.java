@@ -9,7 +9,6 @@ import java.util.List;
 public interface LineMapper {
     int deleteByPrimaryKey(String lid);
 
-    int insert(Line record);
 
     int insertSelective(Line record);
 
@@ -17,7 +16,12 @@ public interface LineMapper {
 
     int updateByPrimaryKeySelective(Line record);
 
-    int updateByPrimaryKey(Line record);
+    /**
+     * 修改的方法
+     * @param record
+     * @return
+     */
+    int updateByLid(Line record);
 
     /**
      * 根据始发地和目的地查询铁路路线的信息
@@ -30,5 +34,27 @@ public interface LineMapper {
      */
     List<Line> getLineByLid(String lid);
 
+
+    /**
+     * 增加线路的方法
+     */
+    public int addLine(Line line);
+
+    /**
+     * 查询所有线路的方法
+     */
+    public List<Line> getThLineAll(Line line);
+
+    /**
+     * 运营的方法   状态为1
+     */
+
+    public int updateline1(String lid);
+
+    /**
+     * 停止运营的方法   状态为2
+     */
+
+    public int updateline2(String lid);
 
 }

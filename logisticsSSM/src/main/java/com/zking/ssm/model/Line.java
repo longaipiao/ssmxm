@@ -29,6 +29,17 @@ public class Line implements Serializable {
 
     private String lserial;
 
+
+    private Integer lstate;
+
+    public Integer getLstate() {
+        return lstate;
+    }
+
+    public void setLstate(Integer lstate) {
+        this.lstate = lstate;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public String getLid() {
@@ -151,6 +162,7 @@ public class Line implements Serializable {
                 ", voyage='" + voyage + '\'' +
                 ", train='" + train + '\'' +
                 ", lserial='" + lserial + '\'' +
+                ", lstate=" + lstate +
                 '}';
     }
 }
