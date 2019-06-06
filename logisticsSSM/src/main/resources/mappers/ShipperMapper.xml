@@ -111,7 +111,22 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Shipper" >
+
+  <!--增加发货人的方法-->
+    <insert id="addShipper">
+       insert into t_shipper (sid, sname, pingyinsname,
+      stel, pickdate,
+      quantity, saddress, sdate,
+      goodname, snote)
+    values (#{sid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{pingyinsname,jdbcType=VARCHAR},
+     #{stel,jdbcType=VARCHAR}, #{pickdate,jdbcType=VARCHAR},
+      #{quantity,jdbcType=INTEGER}, #{saddress,jdbcType=VARCHAR}, #{sdate,jdbcType=VARCHAR},
+      #{goodname,jdbcType=VARCHAR}, #{snote,jdbcType=VARCHAR})
+    </insert>
+
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Shipper" >
     update t_shipper
     <set >
       <if test="sname != null" >

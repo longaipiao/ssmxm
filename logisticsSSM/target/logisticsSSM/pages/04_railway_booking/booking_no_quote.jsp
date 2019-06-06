@@ -12,10 +12,13 @@
     <link href="../../css/common.css" rel="stylesheet" type="text/css"/>
     <link href="../../css/verify.css" rel="stylesheet" type="text/css"/>
     <link href="../../css/reset.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/admin/plugins/layui/css/layui.css" media="all">
     <link href="../../css/animate.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../../js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.1.7.2.min.js"></script>
     <script type="text/javascript" src="../../js/customer2.js"></script>
     <script type="text/javascript" src="../../js/verify.js"></script>
+    <script type="text/javascript" src="/admin/plugins/layui/layui.js"></script>
+    <script type="text/javascript" src="/lhbjs/srgall.js"></script>
 </head>
 
 <body class="bg_f4">
@@ -62,7 +65,7 @@
         <h1 class="logo_text"><a href="../../index.jsp"><img alt="" width="100px" height="" src="../../images/logo_text.png"/></a></h1>
         <ul class="nav">
             <li><a class="current" href="../04_railway_booking/booking_no_quote.jsp">铁路订舱</a></li>
-            <li><a href="../05_railway_class/railway_class.jsp">铁路班列</a></li>
+            <li><a href="/line">铁路班列</a></li>
             <li><a href="../06_order_tracking/order_tracking.jsp">订舱跟踪</a></li>
             <li><a href="../07_about_us/about.jsp">关于平台</a></li>
         </ul>
@@ -153,36 +156,44 @@
             </colgroup>
             <tr>
                 <th>发货人(中文)：</th>
-                <td><select class="sel_B">
-                    <option>请选择</option>
-                    <option>张三</option>
-                </select>
+                <td><input type="text" id="sname"  class="input_B" placeholder="发货人"/></td>
+                <th>联系电话：</th>
+                <td><input type="text" id="stel"  class="input_B" placeholder="联系电话"/></td>
+            </tr>
+            <tr>
+                <th>预约提货日期：</th>
+                <td>
+                    <span class="date_select">
+                        <div class="layui-inline">
+                              <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="pickdate" placeholder="预约提货日期">
+                              </div>
+                        </div>
+                    </span>
                 </td>
-                <th>发货人(英文)：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>联系人：</th>
-                <td><input type="text" class="input_B"/></td>
-
+                <th>箱量（个数）：</th>
+                <td><input type="text" id="quantity"  class="input_B" placeholder="箱量"/></td>
+                <th>发货地址：</th>
+                <td><input type="text" id="saddress"  class="input_B" placeholder="发货地址"/></td>
             </tr>
             <tr>
-                <th>联系电话：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>联系电话：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>提货日期：</th>
-                <td><span class="date_select"><input type="text" placeholder="选择日期" class="input_B lay_t_item"></span></td>
-            </tr>
-            <tr>
-                <th>箱型：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>箱量：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>箱主：</th>
-                <td><form>
-                    <label><input class="form_radio" type="radio" name="xz"/>&nbsp;自备</label>&nbsp;&nbsp;
-                    <label><input class="form_radio" type="radio" name="xz"/>&nbsp;平台</label>
-                </form></td>
+                <th>预约发货时间：</th>
+                <td>
+                    <span class="date_select">
+                        <div class="layui-inline">
+                              <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="sdate" placeholder="预约发货时间">
+                              </div>
+                        </div>
+                    </span>
+                </td>
 
+                <th>货物名称：</th>
+                <td><input type="text" id="goodname" class="input_B" placeholder="货物名称"/></td>
+                <th>备注：</th>
+                <td>
+                   <textarea placeholder="请输入内容"  id="snote" class="layui-textarea" style="width: 200px;"></textarea>
+                </td>
             </tr>
         </table>
     </div>
@@ -201,33 +212,16 @@
             </colgroup>
             <tr>
                 <th>收货人(中文)：</th>
-                <td><input type="text" class="input_B"/>
+                <td><input type="text" id="rname"  class="input_B" placeholder="收货人"/>
                 </td>
-                <th>发货人(英文)：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>联系人(中文)：</th>
-                <td><input type="text" class="input_B"/></td>
-
-            </tr>
-            <tr>
-                <th>联系人(英文)：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>联系电话：</th>
-                <td><input type="text" class="input_B"/></td>
+                <th>联系人电话：</th>
+                <td><input type="text" id="rtel"  class="input_B" placeholder="联系人电话"/></td>
                 <th>电子邮箱：</th>
-                <td><input type="text" class="input_B"/></td>
+                <td><input type="text" id="remail" class="input_B" placeholder="电子邮箱"/></td>
             </tr>
             <tr>
-                <th>送货地址(中文)：</th>
-                <td colspan="5"><input type="text" class="input_C"/></td>
-
-
-            </tr>
-            <tr>
-                <th>送货地址(英文)：</th>
-                <td colspan="5"><input type="text" class="input_C"/></td>
-
-
+                <th>送货地址：</th>
+                <td><input type="text" id="raddress"  class="input_B" placeholder="送货地址"/></td>
             </tr>
         </table>
     </div>
@@ -246,34 +240,21 @@
                 <col width="242">
             </colgroup>
             <tr>
-                <th>唛头：</th>
-                <td><input type="text" class="input_B"/>
+                <th>货物名称：</th>
+                <td><input type="text" id="gname"  class="input_B" placeholder="货物名称"/>
                 </td>
-                <th>货物名称(中文)：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>货物名称(英文)：</th>
-                <td><input type="text" class="input_B"/></td>
+                <th>包装要求(中文)：</th>
+                <td><input type="text" id="packaging" class="input_B" placeholder="包装要求"/></td>
+                <th>件数(单位：件)：</th>
+                <td><input type="text" id="number"  class="input_B" placeholder="件数"/></td>
 
             </tr>
             <tr>
-                <th>国内报关HS：</th>
-                <td><input type="text" class="input_B"/>
+                <th>总重（单位：kg）：</th>
+                <td><input type="text" id="gweight"  class="input_B" placeholder="总重"/>
                 </td>
-                <th>国外清关HS：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>包装要求：</th>
-                <td><input type="text" class="input_B"/></td>
-
-            </tr>
-            <tr>
-                <th>件数：</th>
-                <td><input type="text" class="input_B"/>
-                </td>
-                <th>总毛重(KGS)：</th>
-                <td><input type="text" class="input_B"/></td>
-                <th>总体积(CBM)：</th>
-                <td><input type="text" class="input_B"/></td>
-
+                <th>总体积(单位:m3)：</th>
+                <td><input type="text" id="gvolume" class="input_B" placeholder="总体积"/></td>
             </tr>
         </table>
     </div>
@@ -283,64 +264,23 @@
 
     <div class="w_table_A">
         <table class="table_A">
-
             <tr>
-
-                <td><form>
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要代报关</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要进仓</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要进仓</label>
-                </form>
+                <td>
+                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要本公司提货</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;是否需要本公司送货</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-
-
             </tr>
 
         </table>
     </div>
-
-    <h2 class="title_main mTop_40">订舱协议</h2>
-
-    <div class="w_table_A">
-        <table class="table_A">
-
-            <tr>
-
-                <td><form>
-                    <label><input class="form_checkbox" type="checkbox"/>&nbsp;同意<a class="tcp" href="#" data-dialog="dialog3">《电子订舱协议》</a></label>
-                </form>
-                </td>
-
-
-            </tr>
-
-        </table>
-    </div>
-
-
-
-
-
-
-
     <div class="btn_wrap" style="margin-top:0">
         <div class="btn_inline">
             <ul>
-                <li> <a href="#" class="btn_login">提交订舱单</a> </li>
-
-
+                <li><a href="javascript:void(0);" class="layui-btn" id="but">提交订舱单</a></li>
             </ul>
-
-
         </div>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -445,8 +385,33 @@
 <script src="../../js/banner.js" type="text/javascript"></script>
 <script src="../../js/slider.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/jquery.hDialog.min.js"></script>
+<%--
 <script type="text/javascript" src="../../js/laydate/laydate.js"></script>
+--%>
 
+<script>
+    $(function () {
+
+
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#pickdate'
+        });
+        //常规用法
+        laydate.render({
+            elem: '#sdate'
+        });
+
+    });
+
+    });
+</script>
 
 
 <script type="text/javascript">
@@ -457,50 +422,12 @@
                 elem: this
             });
         });
+
     });
 
 
 
 
-    $(function(){
-    /*滑动验证*/
-        $('#mpanel1').slideVerify({
-            type : 1,		//类型
-            vOffset : 5,	//误差量，根据需求自行调整
-            barSize : {
-                width : '398px',
-                height : '54px',
-            },
-            ready : function() {
-            },
-
-
-        });
-
-        $('#mpanel2').slideVerify({
-            type : 1,		//类型
-            vOffset : 5,	//误差量，根据需求自行调整
-            barSize : {
-                width : '398px',
-                height : '54px',
-            },
-            ready : function() {
-            },
-
-
-        });
-
-
-
-        //右侧帮助弹出
-        $(function(){
-            var $el = $('.dialog_help');
-            $el.hDialog(); //默认调用
-            //slideOutRight关闭效果
-            $('.demo40').hDialog({effect: 'slideOutRight'});
-
-
-        });
 </script>
 </body>
 </html>

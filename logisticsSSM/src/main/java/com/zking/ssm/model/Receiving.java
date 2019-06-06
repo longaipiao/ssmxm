@@ -1,7 +1,9 @@
 package com.zking.ssm.model;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+@Component
 public class Receiving implements Serializable {
     private String rid;
 

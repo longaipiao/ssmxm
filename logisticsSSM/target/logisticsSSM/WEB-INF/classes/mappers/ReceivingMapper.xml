@@ -23,7 +23,9 @@
     delete from t_receiving
     where rid = #{rid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zking.ssm.model.Receiving" >
+
+  <!--添加收货方的信息-->
+  <insert id="addReceiving" parameterType="com.zking.ssm.model.Receiving" >
     insert into t_receiving (rid, rname, pingyinrname, 
       rtel, remail, raddress, 
       rstate)

@@ -17,10 +17,6 @@ public class PriceServiceImpl implements PriceService {
         return priceMapper.deleteByPrimaryKey(pid);
     }
 
-    @Override
-    public int insert(Price record) {
-        return priceMapper.insert(record);
-    }
 
     @Override
     public int insertSelective(Price record) {
@@ -40,5 +36,17 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public int updateByPrimaryKey(Price record) {
         return priceMapper.updateByPrimaryKey(record);
+    }
+
+
+
+    /**
+     * 添加价格的方法
+     * @param record
+     * @return
+     */
+    @Override
+    public int insert(Price record) {
+        return priceMapper.insert(record);
     }
 }

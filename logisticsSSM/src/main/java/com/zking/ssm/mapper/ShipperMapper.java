@@ -16,4 +16,11 @@ public interface ShipperMapper {
     int updateByPrimaryKeySelective(Shipper record);
 
     int updateByPrimaryKey(Shipper record);
+
+    /**
+     * 增加发货人的方法
+     * @param shipper
+     * @return
+     */
+    int addShipper(Shipper shipper);
 }

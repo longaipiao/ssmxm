@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>线路列表</title>
-    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/admin/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/admin/plugins/layui/layui.js"></script>
     <link rel="stylesheet" href="/admin/plugins/layui/css/layui.css" media="all">
     <script type="text/javascript" src="/admin/js/ht/lineall.js"></script>

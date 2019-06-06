@@ -15,4 +15,9 @@ public interface ReceivingService {
     int updateByPrimaryKeySelective(Receiving record);
 
     int updateByPrimaryKey(Receiving record);
+
+    /**
+     * 添加收货方的信息
+     */
+    int addReceiving(Receiving receiving);
 }

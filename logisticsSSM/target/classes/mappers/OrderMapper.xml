@@ -36,6 +36,8 @@
     delete from t_order
     where oid = #{oid,jdbcType=VARCHAR}
   </delete>
+
+  <!--添加订单的方法-->
   <insert id="insert" parameterType="com.zking.ssm.model.Order" >
     insert into t_order (oid, uid, blno, 
       credate, onumber, ostate, 
@@ -46,6 +48,8 @@
       #{price.pid,jdbcType=VARCHAR}, #{lid,jdbcType=VARCHAR}, #{oaddress,jdbcType=VARCHAR},
       #{thstate,jdbcType=INTEGER})
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.zking.ssm.model.Order" >
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >

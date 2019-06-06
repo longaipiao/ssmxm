@@ -24,7 +24,9 @@
     delete from t_goods
     where gid = #{gid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zking.ssm.model.Goods" >
+
+  <!--添加货物的方法-->
+  <insert id="addGoods" parameterType="com.zking.ssm.model.Goods" >
     insert into t_goods (gid, uid, gname, 
       pingyingname, packaging, number, 
       gweight, gvolume)
