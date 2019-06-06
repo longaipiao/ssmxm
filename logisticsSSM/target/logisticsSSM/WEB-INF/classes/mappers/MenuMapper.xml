@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Menu" >
+    <id column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="mtype" property="mtype" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="icons" property="icons" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="perms" property="perms" jdbcType="VARCHAR" />
+    <result column="spread" property="spread" jdbcType="INTEGER" />
+    <result column="ordernum" property="ordernum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mid, mname, mtype, pid, icons, href, perms, spread, ordernum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu
+    where mid = #{mid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_menu
+    where mid = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Menu" >
+    insert into t_menu (mid, mname, mtype, 
+      pid, icons, href, perms, 
+      spread, ordernum)
+    values (#{mid,jdbcType=VARCHAR}, #{mname,jdbcType=VARCHAR}, #{mtype,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=VARCHAR}, #{icons,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, 
+      #{spread,jdbcType=INTEGER}, #{ordernum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Menu" >
+    insert into t_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+      <if test="mtype != null" >
+        mtype,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="icons != null" >
+        icons,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="perms != null" >
+        perms,
+      </if>
+      <if test="spread != null" >
+        spread,
+      </if>
+      <if test="ordernum != null" >
+        ordernum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mtype != null" >
+        #{mtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="icons != null" >
+        #{icons,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null" >
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="spread != null" >
+        #{spread,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Menu" >
+    update t_menu
+    <set >
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mtype != null" >
+        mtype = #{mtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="icons != null" >
+        icons = #{icons,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null" >
+        perms = #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="spread != null" >
+        spread = #{spread,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null" >
+        ordernum = #{ordernum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Menu" >
+    update t_menu
+    set mname = #{mname,jdbcType=VARCHAR},
+      mtype = #{mtype,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      icons = #{icons,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      spread = #{spread,jdbcType=INTEGER},
+      ordernum = #{ordernum,jdbcType=INTEGER}
+    where mid = #{mid,jdbcType=VARCHAR}
+  </update>
+</mapper>

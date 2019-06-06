@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+                      http://www.springframework.org/schema/task
+                      http://www.springframework.org/schema/task/spring-task.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--引入shiro-spring的依赖-->
+    <import resource="classpath*:applicationContext-shiro.xml"/>
+    <!--1:自动扫描com.zking包下所有类中的注解-->
+    <context:component-scan base-package="com.zking"/>
+
+    <!--2:开启注解驱动-->
+    <task:annotation-driven/>
+    <mvc:annotation-driven/>
+
+    <!--3:处理静态资源文件，303效验等，必须写-->
+    <mvc:default-servlet-handler/>
+
+    <!--4:加载外部jdbc.properties文件-->
+    <context:property-placeholder location="classpath*:jdbc.properties"/>
+
+    <!--5:配置dbcp2数据库连接池（数据源）-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--初始连接数-->
+        <property name="initialSize" value="10"/>
+        <!--最大活动连接数-->
+        <property name="maxTotal" value="100"/>
+        <!--最大空闲连接数-->
+        <property name="maxIdle" value="50"/>
+        <!--最小空闲连接数-->
+        <property name="minIdle" value="10"/>
+        <!--设置为-1时，如果没有可用连接，连接池会一直无限期等待，直到获取到连接为止。-->
+        <!--如果设置为N（毫秒），则连接池会等待N毫秒，等待不到，则抛出异常-->
+        <property name="maxWaitMillis" value="-1"/>
+    </bean>
+
+    <!--6：配置SqlSessionFactory-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--6.1:引入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--6.2:加载映射文件-->
+        <property name="mapperLocations" value="classpath*:mappers/*.xml"/>
+        <!--6.3:设置别名-->
+        <!--<property name="typeAliasesPackage" value="com.zking.ssm.model"/>-->
+        <!--6.4:配置pagehelper插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--7:扫描Mapper：向com.zking.dao中映射SqlSessionFactory-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--向com.zking.dao中的接口注入sqlSessionFactory实例，这样接口可以直接使用该实例 -->
+        <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
+        <property name="basePackage" value="com.zking.ssm.mapper"/>
+    </bean>
+
+    <!--8:开启spring事务管理 在service中的impl中使用事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--启用spring事务注解 在类或者方法上使用@Transaction-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 使用ehcache缓存 -->
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+        <property name="shared" value="true"></property>
+    </bean>
+    <!-- 默认是cacheManager -->
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="cacheManagerFactory"/>
+    </bean>
+
+
+</beans>

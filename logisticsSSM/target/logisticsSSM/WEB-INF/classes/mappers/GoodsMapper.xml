@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Goods" >
+    <id column="gid" property="gid" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="pingyingname" property="pingyingname" jdbcType="VARCHAR" />
+    <result column="packaging" property="packaging" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="gweight" property="gweight" jdbcType="INTEGER" />
+    <result column="gvolume" property="gvolume" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gid, uid, gname, pingyingname, packaging, number, gweight, gvolume
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where gid = #{gid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_goods
+    where gid = #{gid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Goods" >
+    insert into t_goods (gid, uid, gname, 
+      pingyingname, packaging, number, 
+      gweight, gvolume)
+    values (#{gid,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, 
+      #{pingyingname,jdbcType=VARCHAR}, #{packaging,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{gweight,jdbcType=INTEGER}, #{gvolume,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="pingyingname != null" >
+        pingyingname,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="gweight != null" >
+        gweight,
+      </if>
+      <if test="gvolume != null" >
+        gvolume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyingname != null" >
+        #{pingyingname,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="gweight != null" >
+        #{gweight,jdbcType=INTEGER},
+      </if>
+      <if test="gvolume != null" >
+        #{gvolume,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Goods" >
+    update t_goods
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyingname != null" >
+        pingyingname = #{pingyingname,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="gweight != null" >
+        gweight = #{gweight,jdbcType=INTEGER},
+      </if>
+      <if test="gvolume != null" >
+        gvolume = #{gvolume,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Goods" >
+    update t_goods
+    set uid = #{uid,jdbcType=INTEGER},
+      gname = #{gname,jdbcType=VARCHAR},
+      pingyingname = #{pingyingname,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      gweight = #{gweight,jdbcType=INTEGER},
+      gvolume = #{gvolume,jdbcType=INTEGER}
+    where gid = #{gid,jdbcType=VARCHAR}
+  </update>
+</mapper>

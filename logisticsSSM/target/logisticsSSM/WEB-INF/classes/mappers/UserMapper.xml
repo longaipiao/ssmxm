@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.User" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="upassword" property="upassword" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="dateofbirth" property="dateofbirth" jdbcType="VARCHAR" />
+    <result column="usex" property="usex" jdbcType="VARCHAR" />
+    <result column="utel" property="utel" jdbcType="VARCHAR" />
+    <result column="headportrait" property="headportrait" jdbcType="VARCHAR" />
+    <result column="ustate" property="ustate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, upassword, email, dateofbirth, usex, utel, headportrait,ustate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <!--用户登录的方法-->
+  <select id="UserLogin" resultType="boolean" parameterType="com.zking.ssm.model.User">
+    select
+      <include refid="Base_Column_List" />
+      from t_user
+    where uname = #{uname} and upassword = #{upassword}
+  </select>
+
+  <!--用户查询带模糊查的方法-->
+  <select id="FindUserlike" resultType="com.zking.ssm.model.User" parameterType="com.zking.ssm.model.User">
+    select
+      <include refid="Base_Column_List" />
+    from t_user where 1 = 1
+    <if test="uname!=null">
+      and uname like '%${uname}%'
+    </if>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.User" >
+    insert into t_user (uid, uname, upassword, 
+      email, dateofbirth, usex, 
+      utel, headportrait)
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{upassword,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{dateofbirth,jdbcType=VARCHAR}, #{usex,jdbcType=VARCHAR}, 
+      #{utel,jdbcType=VARCHAR}, #{headportrait,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="upassword != null" >
+        upassword,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="dateofbirth != null" >
+        dateofbirth,
+      </if>
+      <if test="usex != null" >
+        usex,
+      </if>
+      <if test="utel != null" >
+        utel,
+      </if>
+      <if test="headportrait != null" >
+        headportrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null" >
+        #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="dateofbirth != null" >
+        #{dateofbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="usex != null" >
+        #{usex,jdbcType=VARCHAR},
+      </if>
+      <if test="utel != null" >
+        #{utel,jdbcType=VARCHAR},
+      </if>
+      <if test="headportrait != null" >
+        #{headportrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <!--用户注册的方法-->
+    <insert id="regUser" parameterType="com.zking.ssm.model.User">
+        insert into t_user(uname,upassword,email,utel,dateofbirth)
+        values(#{uname},#{upassword},#{email},#{utel},#{dateofbirth})
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.User" >
+    update t_user
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null" >
+        upassword = #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="dateofbirth != null" >
+        dateofbirth = #{dateofbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="usex != null" >
+        usex = #{usex,jdbcType=VARCHAR},
+      </if>
+      <if test="utel != null" >
+        utel = #{utel,jdbcType=VARCHAR},
+      </if>
+      <if test="headportrait != null" >
+        headportrait = #{headportrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+
+
+  <!--/**
+     * 编辑的方法
+     * @param record
+     * @return
+     */-->
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.User" >
+    update t_user
+    set uname = #{uname,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      dateofbirth = #{dateofbirth,jdbcType=VARCHAR},
+      usex = #{usex,jdbcType=VARCHAR},
+      utel = #{utel,jdbcType=VARCHAR},
+      headportrait = #{headportrait,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+
+  <!--解封用户的方法  状态为1-->
+  <update id="updateState1" parameterType="integer">
+    update t_user set ustate = 1 where uid = #{uid}
+  </update>
+  <!--封禁用户的方法   状态为2-->
+  <update id="updateState2" parameterType="integer">
+    update t_user set ustate = 2 where uid = #{uid}
+  </update>
+</mapper>

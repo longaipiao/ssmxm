@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.EmpMapper" >
+ <!-- <resultMap id="BaseResultMap" type="com.zking.ssm.model.Emp" >
+   <id column="eid" property="eid" jdbcType="VARCHAR" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="epassword" property="epassword" jdbcType="VARCHAR" />
+    <result column="esex" property="esex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="eaddress" property="eaddress" jdbcType="VARCHAR" />
+    <result column="etel" property="etel" jdbcType="VARCHAR" />
+    <result column="elevel" property="elevel" jdbcType="INTEGER" />&ndash;&gt;
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eid, ename, epassword, esex, regtime, state, eaddress, etel, elevel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    &lt;!&ndash;select
+    <include refid="Base_Column_List" />
+    from t_emp
+    where eid = #{eid,jdbcType=VARCHAR}&ndash;&gt;
+  </select>-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_emp
+    where eid = #{eid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Emp" >
+    insert into t_emp (eid, ename, epassword, 
+      esex, regtime, state, 
+      eaddress, etel, elevel
+      )
+    values (#{eid,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{epassword,jdbcType=VARCHAR}, 
+      #{esex,jdbcType=VARCHAR}, #{regtime,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{eaddress,jdbcType=VARCHAR}, #{etel,jdbcType=VARCHAR}, #{elevel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Emp" >
+    insert into t_emp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="epassword != null" >
+        epassword,
+      </if>
+      <if test="esex != null" >
+        esex,
+      </if>
+      <if test="regtime != null" >
+        regtime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="eaddress != null" >
+        eaddress,
+      </if>
+      <if test="etel != null" >
+        etel,
+      </if>
+      <if test="elevel != null" >
+        elevel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="epassword != null" >
+        #{epassword,jdbcType=VARCHAR},
+      </if>
+      <if test="esex != null" >
+        #{esex,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="eaddress != null" >
+        #{eaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="etel != null" >
+        #{etel,jdbcType=VARCHAR},
+      </if>
+      <if test="elevel != null" >
+        #{elevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Emp" >
+    update t_emp
+    <set >
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="epassword != null" >
+        epassword = #{epassword,jdbcType=VARCHAR},
+      </if>
+      <if test="esex != null" >
+        esex = #{esex,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regtime = #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="eaddress != null" >
+        eaddress = #{eaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="etel != null" >
+        etel = #{etel,jdbcType=VARCHAR},
+      </if>
+      <if test="elevel != null" >
+        elevel = #{elevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Emp" >
+    update t_emp
+    set ename = #{ename,jdbcType=VARCHAR},
+      epassword = #{epassword,jdbcType=VARCHAR},
+      esex = #{esex,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      eaddress = #{eaddress,jdbcType=VARCHAR},
+      etel = #{etel,jdbcType=VARCHAR},
+      elevel = #{elevel,jdbcType=INTEGER}
+    where eid = #{eid,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="loginEmp" parameterType="com.zking.ssm.model.Emp" resultType="com.zking.ssm.model.Emp">
+              select *
+                   from t_emp
+              where ename=#{ename}
+  </select>
+
+  <!--根据用户找到用户权限-->
+  <select id="getMens" parameterType="String" resultType="com.zking.ssm.model.Menu">
+              SELECT m.*
+                    from t_emp e,t_role r,t_emp_role er,t_menu m,t_role_menu rm
+              where e.eid=#{eid} AND e.eid=er.eid AND r.rid=er.rid AND m.mid=rm.mid and rm.rid=er.rid
+   </select>
+
+    <!--获取所有的菜单-->
+    <select id="getMensss"  resultType="com.zking.ssm.model.Menu">
+                 select * from t_menu
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.zking.ssm.model.Emp" >
+       <id column="eid" property="eid" jdbcType="VARCHAR" />
+        <result column="ename" property="ename" jdbcType="VARCHAR" />
+        <result column="epassword" property="epassword" jdbcType="VARCHAR" />
+        <result column="esex" property="esex" jdbcType="VARCHAR" />
+        <result column="regtime" property="regtime" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="eaddress" property="eaddress" jdbcType="VARCHAR" />
+        <result column="etel" property="etel" jdbcType="VARCHAR" />
+        <result column="elevel" property="elevel" jdbcType="INTEGER" />
+        <association property="role" javaType="com.zking.ssm.model.Role">
+            <id property="rname" column="rname"/>
+        </association>
+
+
+    </resultMap>
+    
+      <!--    根据地域找到所有员工-->
+  <select id="getEmps"  parameterType="com.zking.ssm.model.Emp" resultMap="BaseResultMap">
+            /* select *
+                  from t_emp where 1=1*/
+              select a.*,b.rname from t_emp a,t_role b,t_emp_role c
+              WHERE a.eid=c.eid AND b.rid=c.rid
+             <if test="eaddress !=null ">
+                 and a.eaddress=#{eaddress}
+             </if>
+              <if test="ename != null" >
+                and a.ename like '%${ename}%'
+              </if>
+              <if test="esex != null" >
+                and a.esex like '%${esex}%'
+              </if>
+              <if test="regtime != null" >
+                and a.regtime like '%${regtime}%'
+              </if>
+              <if test="state != null" >
+                and a.state like  '%${state}%'
+              </if>
+              <if test="etel != null" >
+                and a.etel like '%${etel}%'
+              </if>
+
+
+
+    </select>
+
+
+  <!--  增加员工-->
+  <insert id="addEmp" parameterType="com.zking.ssm.model.Emp" useGeneratedKeys="true" keyColumn="eid">
+            insert  into
+                        t_emp
+            values (#{eid},#{ename},#{epassword},#{esex},#{eaddress},#{regtime},1,#{etel},#{elevel})
+  </insert>
+
+
+  <!--  获取最大值的eid-->
+  <select id="getMaxeid" resultType="integer">
+           select MAX(elevel) from t_emp
+  </select>
+
+<!--  开始增加角色和员工表-->
+  <insert id="addER">
+         insert into
+                t_emp_role(eid,rid)
+        values (#{eid},#{rid})
+  </insert>
+  
+<!--  根据id删除emp-->
+<delete id="deleteEmpById" parameterType="integer">
+          delete  from
+                  t_emp
+         where elevel=#{id}
+</delete>
+
+<!--  删除角色表-->
+<delete id="deletEr" parameterType="integer">
+     delete  from
+         t_emp_role
+     where eid=#{id}
+</delete>
+    
+    
+<!--    批量删除-->
+    <delete id="deletEmps" parameterType="list">
+        delete from
+                   t_emp
+        where eid in
+        <foreach collection="list"  item="item"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--    批量删除er表-->
+    <delete id="delelteErs" parameterType="list">
+        delete from
+                   t_emp_role
+        where eid in
+        <foreach collection="list"  item="item"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getP" parameterType="string" resultType="com.zking.ssm.model.Emp">
+              select * from  t_emp where ename=#{ename}
+    </select>
+
+<!--    修改员工-->
+    <update id="updateEmp" parameterType="com.zking.ssm.model.Emp">
+               update t_emp
+                        set epassword=#{epassword},esex=#{esex},eaddress=#{eaddress},
+                        regtime=#{regtime},etel=#{etel}
+               where eid=#{eid}
+    </update>
+
+
+<!--    修改员工角色-->
+    <update id="updateER">
+              update t_emp_role
+                               set rid=#{rid}
+             where eid=#{eid}
+    </update>
+
+
+<!--    查看所有的角色-->
+    <select id="getRoles" resultType="com.zking.ssm.model.Role">
+             select  * from t_role
+    </select>
+
+
+<!--    查找最大的-->
+    <select id="queryMAxRid" resultType="integer">
+             select max(rid) from t_role
+    </select>
+
+
+<!--    增加角色-->
+    <insert id="addRole" parameterType="com.zking.ssm.model.Role"  >
+              insert into
+                    t_role
+              values (#{rid},#{rname})
+    </insert>
+
+<!--    删除role角色-->
+    <delete id="deleteRole" parameterType="string">
+              delete  from
+                     t_role
+                     where rid=#{rid}
+    </delete>
+
+
+<!--    删除菜单和角色关系表-->
+    <delete id="deleteRM" parameterType="string">
+             delete  from
+                        t_role_menu
+             where rid=#{rid}
+    </delete>
+
+<!--    根据rid找到所有的mid-->
+<select id="getmid" resultType="integer">
+         select mid from
+                        t_role_menu
+         where rid=#{rid}
+
+</select>
+
+</mapper>

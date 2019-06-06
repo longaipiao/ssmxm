@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.LineMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Line" >
+    <id column="lid" property="lid" jdbcType="VARCHAR" />
+    <result column="lstart" property="lstart" jdbcType="VARCHAR" />
+    <result column="lend" property="lend" jdbcType="VARCHAR" />
+    <result column="startdate" property="startdate" jdbcType="VARCHAR" />
+    <result column="enddate" property="enddate" jdbcType="VARCHAR" />
+    <result column="lnote" property="lnote" jdbcType="VARCHAR" />
+    <result column="lweight" property="lweight" jdbcType="INTEGER" />
+    <result column="trunksize" property="trunksize" jdbcType="INTEGER" />
+    <result column="trains" property="trains" jdbcType="VARCHAR" />
+    <result column="lway" property="lway" jdbcType="VARCHAR" />
+    <result column="voyage" property="voyage" jdbcType="VARCHAR" />
+    <result column="train" property="train" jdbcType="VARCHAR" />
+    <result column="lserial" property="lserial" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lid, lstart, lend, startdate, enddate, lnote, lweight, trunksize, trains, lway, voyage, 
+    train, lserial
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_line
+    where lid = #{lid,jdbcType=VARCHAR}
+  </select>
+
+
+    <!-- 根据始发地和目的地查询铁路路线的信息-->
+    <select id="getLineAll" resultType="com.zking.ssm.model.Line" parameterType="com.zking.ssm.model.Line">
+      select
+      <include refid="Base_Column_List" />
+      from t_line
+      where 1 = 1
+      <if test="lstart != null">
+        and lstart like '%${lstart}%'
+      </if>
+      <if test="lend != null">
+        and lend like '%${lend}%'
+      </if>
+
+      <if test="startdate != null">
+        and startdate like '%${startdate}%'
+      </if>
+
+      <if test="enddate != null">
+        and enddate like '%${enddate}%'
+      </if>
+    </select>
+
+  <!--根据线路id查询线路信息-->
+  <select id="getLineByLid" resultType="com.zking.ssm.model.Line" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from t_line
+    where lid = #{lid}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_line
+    where lid = #{lid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Line" >
+    insert into t_line (lid, lstart, lend, 
+      startdate, enddate, lnote, 
+      lweight, trunksize, trains, 
+      lway, voyage, train, 
+      lserial)
+    values (#{lid,jdbcType=VARCHAR}, #{lstart,jdbcType=VARCHAR}, #{lend,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{lnote,jdbcType=VARCHAR}, 
+      #{lweight,jdbcType=INTEGER}, #{trunksize,jdbcType=INTEGER}, #{trains,jdbcType=VARCHAR}, 
+      #{lway,jdbcType=VARCHAR}, #{voyage,jdbcType=VARCHAR}, #{train,jdbcType=VARCHAR}, 
+      #{lserial,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Line" >
+    insert into t_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        lid,
+      </if>
+      <if test="lstart != null" >
+        lstart,
+      </if>
+      <if test="lend != null" >
+        lend,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="lnote != null" >
+        lnote,
+      </if>
+      <if test="lweight != null" >
+        lweight,
+      </if>
+      <if test="trunksize != null" >
+        trunksize,
+      </if>
+      <if test="trains != null" >
+        trains,
+      </if>
+      <if test="lway != null" >
+        lway,
+      </if>
+      <if test="voyage != null" >
+        voyage,
+      </if>
+      <if test="train != null" >
+        train,
+      </if>
+      <if test="lserial != null" >
+        lserial,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=VARCHAR},
+      </if>
+      <if test="lstart != null" >
+        #{lstart,jdbcType=VARCHAR},
+      </if>
+      <if test="lend != null" >
+        #{lend,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="lnote != null" >
+        #{lnote,jdbcType=VARCHAR},
+      </if>
+      <if test="lweight != null" >
+        #{lweight,jdbcType=INTEGER},
+      </if>
+      <if test="trunksize != null" >
+        #{trunksize,jdbcType=INTEGER},
+      </if>
+      <if test="trains != null" >
+        #{trains,jdbcType=VARCHAR},
+      </if>
+      <if test="lway != null" >
+        #{lway,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage != null" >
+        #{voyage,jdbcType=VARCHAR},
+      </if>
+      <if test="train != null" >
+        #{train,jdbcType=VARCHAR},
+      </if>
+      <if test="lserial != null" >
+        #{lserial,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Line" >
+    update t_line
+    <set >
+      <if test="lstart != null" >
+        lstart = #{lstart,jdbcType=VARCHAR},
+      </if>
+      <if test="lend != null" >
+        lend = #{lend,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="lnote != null" >
+        lnote = #{lnote,jdbcType=VARCHAR},
+      </if>
+      <if test="lweight != null" >
+        lweight = #{lweight,jdbcType=INTEGER},
+      </if>
+      <if test="trunksize != null" >
+        trunksize = #{trunksize,jdbcType=INTEGER},
+      </if>
+      <if test="trains != null" >
+        trains = #{trains,jdbcType=VARCHAR},
+      </if>
+      <if test="lway != null" >
+        lway = #{lway,jdbcType=VARCHAR},
+      </if>
+      <if test="voyage != null" >
+        voyage = #{voyage,jdbcType=VARCHAR},
+      </if>
+      <if test="train != null" >
+        train = #{train,jdbcType=VARCHAR},
+      </if>
+      <if test="lserial != null" >
+        lserial = #{lserial,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lid = #{lid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Line" >
+    update t_line
+    set lstart = #{lstart,jdbcType=VARCHAR},
+      lend = #{lend,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=VARCHAR},
+      lnote = #{lnote,jdbcType=VARCHAR},
+      lweight = #{lweight,jdbcType=INTEGER},
+      trunksize = #{trunksize,jdbcType=INTEGER},
+      trains = #{trains,jdbcType=VARCHAR},
+      lway = #{lway,jdbcType=VARCHAR},
+      voyage = #{voyage,jdbcType=VARCHAR},
+      train = #{train,jdbcType=VARCHAR},
+      lserial = #{lserial,jdbcType=VARCHAR}
+    where lid = #{lid,jdbcType=VARCHAR}
+  </update>
+</mapper>

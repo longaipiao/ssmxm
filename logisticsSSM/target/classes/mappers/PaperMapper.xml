@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.PaperMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Paper" >
+    <id column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="driverno" property="driverno" jdbcType="VARCHAR" />
+    <result column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="eid" property="eid" jdbcType="VARCHAR" />
+    <result column="pstate" property="pstate" jdbcType="INTEGER" />
+    <result column="pdate" property="pdate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pid, driverno, oid, eid, pstate, pdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_paper
+    where pid = #{pid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_paper
+    where pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Paper" >
+    insert into t_paper (pid, driverno, oid, 
+      eid, pstate, pdate)
+    values (#{pid,jdbcType=VARCHAR}, #{driverno,jdbcType=VARCHAR}, #{oid,jdbcType=VARCHAR}, 
+      #{eid,jdbcType=VARCHAR}, #{pstate,jdbcType=INTEGER}, #{pdate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Paper" >
+    insert into t_paper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="driverno != null" >
+        driverno,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="pstate != null" >
+        pstate,
+      </if>
+      <if test="pdate != null" >
+        pdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="driverno != null" >
+        #{driverno,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="pstate != null" >
+        #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="pdate != null" >
+        #{pdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Paper" >
+    update t_paper
+    <set >
+      <if test="driverno != null" >
+        driverno = #{driverno,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="pstate != null" >
+        pstate = #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="pdate != null" >
+        pdate = #{pdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Paper" >
+    update t_paper
+    set driverno = #{driverno,jdbcType=VARCHAR},
+      oid = #{oid,jdbcType=VARCHAR},
+      eid = #{eid,jdbcType=VARCHAR},
+      pstate = #{pstate,jdbcType=INTEGER},
+      pdate = #{pdate,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+</mapper>

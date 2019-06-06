@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ShipperMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Shipper" >
+    <id column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="pingyinsname" property="pingyinsname" jdbcType="VARCHAR" />
+    <result column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="stel" property="stel" jdbcType="VARCHAR" />
+    <result column="pickdate" property="pickdate" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="saddress" property="saddress" jdbcType="VARCHAR" />
+    <result column="sdate" property="sdate" jdbcType="VARCHAR" />
+    <result column="goodname" property="goodname" jdbcType="VARCHAR" />
+    <result column="snote" property="snote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, sname, pingyinsname, rid, stel, pickdate, quantity, saddress, sdate, goodname, 
+    snote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_shipper
+    where sid = #{sid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_shipper
+    where sid = #{sid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Shipper" >
+    insert into t_shipper (sid, sname, pingyinsname, 
+      rid, stel, pickdate, 
+      quantity, saddress, sdate, 
+      goodname, snote)
+    values (#{sid,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{pingyinsname,jdbcType=VARCHAR}, 
+      #{rid,jdbcType=VARCHAR}, #{stel,jdbcType=VARCHAR}, #{pickdate,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER}, #{saddress,jdbcType=VARCHAR}, #{sdate,jdbcType=VARCHAR}, 
+      #{goodname,jdbcType=VARCHAR}, #{snote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Shipper" >
+    insert into t_shipper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="pingyinsname != null" >
+        pingyinsname,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="stel != null" >
+        stel,
+      </if>
+      <if test="pickdate != null" >
+        pickdate,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="saddress != null" >
+        saddress,
+      </if>
+      <if test="sdate != null" >
+        sdate,
+      </if>
+      <if test="goodname != null" >
+        goodname,
+      </if>
+      <if test="snote != null" >
+        snote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyinsname != null" >
+        #{pingyinsname,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null" >
+        #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        #{pickdate,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="saddress != null" >
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sdate != null" >
+        #{sdate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="snote != null" >
+        #{snote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Shipper" >
+    update t_shipper
+    <set >
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyinsname != null" >
+        pingyinsname = #{pingyinsname,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null" >
+        stel = #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        pickdate = #{pickdate,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="saddress != null" >
+        saddress = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sdate != null" >
+        sdate = #{sdate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodname != null" >
+        goodname = #{goodname,jdbcType=VARCHAR},
+      </if>
+      <if test="snote != null" >
+        snote = #{snote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Shipper" >
+    update t_shipper
+    set sname = #{sname,jdbcType=VARCHAR},
+      pingyinsname = #{pingyinsname,jdbcType=VARCHAR},
+      rid = #{rid,jdbcType=VARCHAR},
+      stel = #{stel,jdbcType=VARCHAR},
+      pickdate = #{pickdate,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      saddress = #{saddress,jdbcType=VARCHAR},
+      sdate = #{sdate,jdbcType=VARCHAR},
+      goodname = #{goodname,jdbcType=VARCHAR},
+      snote = #{snote,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=VARCHAR}
+  </update>
+</mapper>

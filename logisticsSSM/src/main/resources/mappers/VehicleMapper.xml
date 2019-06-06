@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.VehicleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Vehicle" >
+    <id column="vid" property="vid" jdbcType="VARCHAR" />
+    <result column="vheight" property="vheight" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="VARCHAR" />
+    <result column="vstate" property="vstate" jdbcType="INTEGER" />
+    <result column="vaddress" property="vaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vid, vheight, eid, vstate, vaddress
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_vehicle
+    where vid = #{vid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_vehicle
+    where vid = #{vid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Vehicle" >
+    insert into t_vehicle (vid, vheight, eid, 
+      vstate, vaddress)
+    values (#{vid,jdbcType=VARCHAR}, #{vheight,jdbcType=INTEGER}, #{eid,jdbcType=VARCHAR}, 
+      #{vstate,jdbcType=INTEGER}, #{vaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Vehicle" >
+    insert into t_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="vheight != null" >
+        vheight,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="vstate != null" >
+        vstate,
+      </if>
+      <if test="vaddress != null" >
+        vaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="vheight != null" >
+        #{vheight,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="vstate != null" >
+        #{vstate,jdbcType=INTEGER},
+      </if>
+      <if test="vaddress != null" >
+        #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Vehicle" >
+    update t_vehicle
+    <set >
+      <if test="vheight != null" >
+        vheight = #{vheight,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="vstate != null" >
+        vstate = #{vstate,jdbcType=INTEGER},
+      </if>
+      <if test="vaddress != null" >
+        vaddress = #{vaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Vehicle" >
+    update t_vehicle
+    set vheight = #{vheight,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=VARCHAR},
+      vstate = #{vstate,jdbcType=INTEGER},
+      vaddress = #{vaddress,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+</mapper>

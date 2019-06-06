@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.ReceivingMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Receiving" >
+    <id column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <result column="pingyinrname" property="pingyinrname" jdbcType="VARCHAR" />
+    <result column="rtel" property="rtel" jdbcType="VARCHAR" />
+    <result column="remail" property="remail" jdbcType="VARCHAR" />
+    <result column="raddress" property="raddress" jdbcType="VARCHAR" />
+    <result column="rstate" property="rstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rid, rname, pingyinrname, rtel, remail, raddress, rstate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_receiving
+    where rid = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_receiving
+    where rid = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Receiving" >
+    insert into t_receiving (rid, rname, pingyinrname, 
+      rtel, remail, raddress, 
+      rstate)
+    values (#{rid,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, #{pingyinrname,jdbcType=VARCHAR}, 
+      #{rtel,jdbcType=VARCHAR}, #{remail,jdbcType=VARCHAR}, #{raddress,jdbcType=VARCHAR}, 
+      #{rstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Receiving" >
+    insert into t_receiving
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="rname != null" >
+        rname,
+      </if>
+      <if test="pingyinrname != null" >
+        pingyinrname,
+      </if>
+      <if test="rtel != null" >
+        rtel,
+      </if>
+      <if test="remail != null" >
+        remail,
+      </if>
+      <if test="raddress != null" >
+        raddress,
+      </if>
+      <if test="rstate != null" >
+        rstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null" >
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyinrname != null" >
+        #{pingyinrname,jdbcType=VARCHAR},
+      </if>
+      <if test="rtel != null" >
+        #{rtel,jdbcType=VARCHAR},
+      </if>
+      <if test="remail != null" >
+        #{remail,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null" >
+        #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rstate != null" >
+        #{rstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Receiving" >
+    update t_receiving
+    <set >
+      <if test="rname != null" >
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="pingyinrname != null" >
+        pingyinrname = #{pingyinrname,jdbcType=VARCHAR},
+      </if>
+      <if test="rtel != null" >
+        rtel = #{rtel,jdbcType=VARCHAR},
+      </if>
+      <if test="remail != null" >
+        remail = #{remail,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null" >
+        raddress = #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rstate != null" >
+        rstate = #{rstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Receiving" >
+    update t_receiving
+    set rname = #{rname,jdbcType=VARCHAR},
+      pingyinrname = #{pingyinrname,jdbcType=VARCHAR},
+      rtel = #{rtel,jdbcType=VARCHAR},
+      remail = #{remail,jdbcType=VARCHAR},
+      raddress = #{raddress,jdbcType=VARCHAR},
+      rstate = #{rstate,jdbcType=INTEGER}
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>
