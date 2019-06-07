@@ -99,12 +99,13 @@ public class SrgController {
         shipper.setSnote(snote);//'备注'
         System.err.println("发货方对象是："+shipper);
         //执行添加发货方的方法
-        int lid = shipperService.addShipper(shipper);
+        int sid = shipperService.addShipper(shipper);
+        System.err.println("增加发货表返回的主键id是："+shipper.getSid());
         System.err.println("结束====添加发货方的方法");
 
         //开始添加收货方信息
         System.err.println("开始提交收货方的数据");
-        receiving.setRid(RandomStringTool.getRandomString(10,true));
+        receiving.setRid(idGeneratorUtils.nextId());
         String rname = (String)map.get("rname");
         receiving.setRname(rname);//收货人名称
         receiving.setPingyinrname(rname);//拼音的名称
@@ -118,11 +119,12 @@ public class SrgController {
         //执行添加收货方的方法
         System.out.println("收货方对象是："+receiving);
         int rid = receivingService.addReceiving(receiving);
+        System.err.println("增加收货表返回的主键id是："+receiving.getRid());
         System.err.println("结束====添加收货方的方法");
 
         //添加货物表的信息
         System.err.println("开始添加货物表的数据");
-        goods.setGid(RandomStringTool.getRandomString(12,true));//货物id
+        goods.setGid(idGeneratorUtils.nextId());//货物id
         goods.setUid(1);//需要获取登录时候的用户id   需要更换的值
         String gname = (String) map.get("gname");
         goods.setGname(gname);//货物名称（中文）
@@ -138,13 +140,15 @@ public class SrgController {
         int gvolume = Integer.parseInt(gvolume1);
         goods.setGvolume(gvolume);//'总体积（m3）
         System.out.println("货物的对象是："+goods);
+
         int gid = goodsService.addGoods(goods);
+        System.err.println("增加货物表返回的主键id是："+goods.getGid());
         System.err.println("结束添加货物表的数据");
 
 
         //开始添加价钱
         System.err.println("开始提交价钱的数据");
-        price.setPid(RandomStringTool.getRandomString(8,true));//价钱id
+        price.setPid(idGeneratorUtils.nextId());//价钱id
         price.setUid(1);//需要获取登录时候的用户id   需要更换的值
         price.setPweight(gweight1);//获取货物表填写的重量
         price.setLandfreight(50);//默认50 元 金额
@@ -174,16 +178,33 @@ public class SrgController {
         price.setPayment("微信");
         price.setPstate(1);//未支付
         int pid = priceService.insert(price);
+        System.err.println("增加价钱表返回的主键id是："+price.getPid());
         System.out.println("结束添加价钱方法的数据");
 
 
         System.err.println("最后添加订单的方法******************");
-
-
-
-
-
-
+        order.setOid(idGeneratorUtils.nextId());//添加订单的id
+        order.setBlno(RandomStringTool.getRandomString(10,true));//设置提单号
+        order.setCredate(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));//订单创建时间
+        order.setOnumber(UUIDUtils.generateString(10));//贸易订单号
+        order.setOaddress(receiving.getRaddress());//添加的是收货人的地址
+        order.setOstate(1);//订单状态为1 是预约订单
+        order.setSid(shipper.getSid());//添加发货的id
+        order.setRid(receiving.getRid());//添加收货的id
+        order.setGid(goods.getGid());//添加货物的id
+        Price price1 = new Price();
+        price1.setPid(price.getPid());
+        order.setPrice(price1);//添加价钱的id
+        order.setUid(1);//需要获取登录时候的用户id   需要更换的值
+        if(1==check){
+            System.err.println("选中的时候执行的  状态是需要提货=========================");
+            order.setThstate(1);//1的状态是需要提货的服务
+        }else{
+            System.err.println("不选中的时候执行的  状态是不需要提货=========================");
+            order.setThstate(2);//2的状态是不需要提货的服务
+        }
+        int oid = orderService.insert(order);
+        System.err.println("****************************结束添加订单的方法************************");
 
     }
 }

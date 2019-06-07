@@ -1,9 +1,33 @@
 $(function (){
 
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#pickdate'
+            });
+            //常规用法
+            laydate.render({
+                elem: '#sdate'
+            });
+
+        });
+
+
+
+
+
+
     //获取的数据
     //添加的方法
     $("#but").click(function () {
-        alert($("#sname").val());
+        var str = "";
+        str += $("#raddress1").val();
+        str += $("#raddress2").val();
+        str += $("#raddress3").val();
 
         if($('#checkbox').is(':checked')){
             alert("选中的时候：");
@@ -23,7 +47,7 @@ $(function (){
                     rname:$("#rname").val(),
                     rtel:$("#rtel").val(),
                     remail:$("#remail").val(),
-                    raddress:$("#raddress").val(),
+                    raddress:str,
                     gname:$("#gname").val(),
                     packaging:$("#packaging").val(),
                     number:$("#number").val(),
@@ -53,7 +77,7 @@ $(function (){
                     rname:$("#rname").val(),
                     rtel:$("#rtel").val(),
                     remail:$("#remail").val(),
-                    raddress:$("#raddress").val(),
+                    raddress:str,
                     gname:$("#gname").val(),
                     packaging:$("#packaging").val(),
                     number:$("#number").val(),

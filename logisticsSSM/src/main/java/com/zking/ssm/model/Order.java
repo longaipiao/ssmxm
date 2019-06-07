@@ -19,6 +19,7 @@ public class Order implements Serializable {
 
     private Price price;
 
+
     private String lid;
 
     private String sid;
@@ -33,9 +34,6 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getPid(){
-        return price.getPid();
-    };
 
 
     public String getOid() {
@@ -156,7 +154,6 @@ public class Order implements Serializable {
     public void setGid(String gid) {
         this.gid = gid;
     }
-
 
     @Override
     public String toString() {

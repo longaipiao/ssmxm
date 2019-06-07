@@ -113,7 +113,7 @@
   </insert>
 
   <!--增加发货人的方法-->
-    <insert id="addShipper">
+    <insert id="addShipper" useGeneratedKeys="true" keyColumn="sid">
        insert into t_shipper (sid, sname, pingyinsname,
       stel, pickdate,
       quantity, saddress, sdate,

@@ -26,7 +26,7 @@
   </delete>
 
   <!--添加货物的方法-->
-  <insert id="addGoods" parameterType="com.zking.ssm.model.Goods" >
+  <insert id="addGoods" parameterType="com.zking.ssm.model.Goods" useGeneratedKeys="true" keyColumn="gid">
     insert into t_goods (gid, uid, gname, 
       pingyingname, packaging, number, 
       gweight, gvolume)

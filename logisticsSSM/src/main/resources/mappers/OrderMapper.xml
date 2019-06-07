@@ -41,7 +41,7 @@
   </delete>
 
   <!--添加订单的方法-->
-  <insert id="insert" parameterType="com.zking.ssm.model.Order" >
+  <insert id="insert" parameterType="com.zking.ssm.model.Order">
     insert into t_order (oid, uid, blno,
       credate, onumber, ostate, 
       pid, rid,gid,sid,lid, oaddress,

@@ -26,11 +26,13 @@
   </delete>
 
   <!--添加价格的方法-->
-  <insert id="insert" parameterType="com.zking.ssm.model.Price" >
+  <insert id="insert" parameterType="com.zking.ssm.model.Price" useGeneratedKeys="true" keyColumn="pid">
     insert into t_price (pid, uid, pweight,
-      landfreight, servicefee, totalmoney)
+      landfreight, servicefee, totalmoney,payment,pstate)
     values (#{pid,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{pweight,jdbcType=VARCHAR},
-      #{landfreight,jdbcType=INTEGER}, #{servicefee,jdbcType=INTEGER}, #{totalmoney,jdbcType=INTEGER})
+      #{landfreight,jdbcType=INTEGER}, #{servicefee,jdbcType=INTEGER}, #{totalmoney,jdbcType=INTEGER}
+      ,#{payment,jdbcType=VARCHAR},#{pstate,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zking.ssm.model.Price" >
     insert into t_price

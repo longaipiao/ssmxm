@@ -14,13 +14,20 @@
     <link href="../../css/reset.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/admin/plugins/layui/css/layui.css" media="all">
     <link href="../../css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.10.0/styles/github.css">
+    <link rel="stylesheet" href="/css/cityselect.css">
+    <link href="/docs/css/main.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery.1.7.2.min.js"></script>
     <script type="text/javascript" src="../../js/customer2.js"></script>
     <script type="text/javascript" src="../../js/verify.js"></script>
     <script type="text/javascript" src="/admin/plugins/layui/layui.js"></script>
     <script type="text/javascript" src="/lhbjs/srgall.js"></script>
 </head>
-
+<style type="text/css">
+    .demo{width:220px;margin:50px auto;}
+    .demo input{padding: 12px 18px;}
+</style>
 <body class="bg_f4">
 <div class="bg_fff">
     <div class="page_con">
@@ -174,7 +181,11 @@
                 <th>箱量（个数）：</th>
                 <td><input type="text" id="quantity"  class="input_B" placeholder="箱量"/></td>
                 <th>发货地址：</th>
-                <td><input type="text" id="saddress"  class="input_B" placeholder="发货地址"/></td>
+                <td>
+                    <div class="demo">
+                       <input type="text" id="saddress"  class="cityinput" placeholder="发货地址"/>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <th>预约发货时间：</th>
@@ -221,7 +232,14 @@
             </tr>
             <tr>
                 <th>送货地址：</th>
-                <td><input type="text" id="raddress"  class="input_B" placeholder="送货地址"/></td>
+                <%--<td><input type="text" id="raddress"  class="input_B" placeholder="送货地址"/></td>--%>
+                <td>
+                    <div data-toggle="distpicker">
+                        <select id="raddress1" class="form-control"></select>
+                        <select id="raddress2" class="form-control"></select>
+                        <select id="raddress3" class="form-control"></select>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
@@ -384,34 +402,15 @@
 <script src="../../js/banner.js" type="text/javascript"></script>
 <script src="../../js/slider.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/jquery.hDialog.min.js"></script>
+<script type="text/javascript" src="/js/cityselect.js"></script>
+<script src="/docs/js/distpicker.js"></script>
+<script src="/docs/js/main.js"></script>
+<script type="text/javascript">
+    var test=new Vcity.CitySelector({input:'saddress'});
+</script>
 <%--
 <script type="text/javascript" src="../../js/laydate/laydate.js"></script>
 --%>
-
-<script>
-    $(function () {
-
-
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
-
-        //常规用法
-        laydate.render({
-            elem: '#pickdate'
-        });
-        //常规用法
-        laydate.render({
-            elem: '#sdate'
-        });
-
-    });
-
-    });
-</script>
-
 
 <script type="text/javascript">
     $(function(){
