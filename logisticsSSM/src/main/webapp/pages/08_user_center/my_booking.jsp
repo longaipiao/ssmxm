@@ -159,36 +159,38 @@
     <div class="right_con">
         <div class="con_user_r clear" style="min-height:480px;">
             <h2>我的订航单</h2>
-            <table class="wrap_user_inp mTop_20">
-                <colgroup>
-                    <col width="80px">
-                    <col width="220px">
-                    <col width="80px">
-                    <col width="220px">
-                    <col width="80px">
-                    <col width="220px">
-                </colgroup>
-                <tr>
-                    <th>订单号：</th>
-                    <td><input class="input_u" placeholder="订单号"/></td>
-                    <th>提单号：</th>
-                    <td><input class="input_u" placeholder="提单号"/></td>
-                </tr>
-                <tr>
-                    <th>起运站：</th>
-                    <td><input class="input_u" placeholder="起运站"/></td>
-                    <th>目的站：</th>
-                    <td><input class="input_u" placeholder="目的站"/></td>
-                </tr>
+            <form method="post" id="forma" action="/selectOrder">
+                <table class="wrap_user_inp mTop_20">
+                    <colgroup>
+                        <col width="80px">
+                        <col width="220px">
+                        <col width="80px">
+                        <col width="220px">
+                        <col width="80px">
+                        <col width="220px">
+                    </colgroup>
+                    <tr>
+                        <th>订单号：</th>
+                        <td><input name="ddh" class="input_u" placeholder="订单号"/></td>
+                        <th>提单号：</th>
+                        <td><input name="tdh" class="input_u" placeholder="提单号"/></td>
+                    </tr>
+                    <tr>
+                        <th>起运站：</th>
+                        <td><input name="qyz" class="input_u" placeholder="起运站"/></td>
+                        <th>目的站：</th>
+                        <td><input name="mdz" class="input_u" placeholder="目的站"/></td>
+                    </tr>
 
-            </table>
-            <div class="btn_wrap" style="margin:20px 0 0 0;">
-                <div class="btn_inline">
-                    <ul>
-                        <li> <a href="/" class="btn_search_user">查询</a> </li>
-                    </ul>
+                </table>
+                <div class="btn_wrap" style="margin:20px 0 0 0;">
+                    <div class="btn_inline">
+                        <ul>
+                            <li> <a href="javascript:void(0)" name="submit" onclick="document.getElementById('forma').submit();return false" class="btn_search_user">查询</a> </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </form>
             <table class="table_U mTop_40">
                 <tr>
                     <th>订单服务状态</th>
@@ -198,29 +200,29 @@
                     <th>订单总价</th>
                     <th>操作</th>
                 </tr>
-            <c:forEach items="${orders}" var="o">
-                <tr>
-                    <td>
-                        <c:if test="${o.ostate==0}">
-                            已提交
-                        </c:if>
-                        <c:if test="${o.ostate==1}">
-                            运输中
-                        </c:if>
-                        <c:if test="${o.ostate==2}">
-                            已到达
-                        </c:if>
-                        <c:if test="${o.ostate==3}">
-                            已提货
-                        </c:if>
-                    </td>
-                    <td>${o.oid}</td>
-                    <td>${o.credate}</td>
-                    <td>${o.blno}</td>
-                    <td>${o.price.totalmoney}</td>
-                    <td><a href="/selectOrder?oid="+${o.oid}>查看详情</a></td>
-                </tr>
-            </c:forEach>
+                <c:forEach items="${orders}" var="o">
+                    <tr>
+                        <td>
+                            <c:if test="${o.ostate==0}">
+                                已提交
+                            </c:if>
+                            <c:if test="${o.ostate==1}">
+                                运输中
+                            </c:if>
+                            <c:if test="${o.ostate==2}">
+                                已到达
+                            </c:if>
+                            <c:if test="${o.ostate==3}">
+                                已提货
+                            </c:if>
+                        </td>
+                        <td>${o.oid}</td>
+                        <td>${o.credate}</td>
+                        <td>${o.blno}</td>
+                        <td>${o.price.totalmoney}</td>
+                        <td><a href="/selectOrder?oid="+${o.oid}>查看详情</a></td>
+                    </tr>
+                </c:forEach>
 
             </table>
         </div>
