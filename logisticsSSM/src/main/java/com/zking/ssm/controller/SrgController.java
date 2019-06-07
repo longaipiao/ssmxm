@@ -4,7 +4,6 @@ import com.mchange.v2.collection.MapEntry;
 import com.zking.ssm.model.*;
 import com.zking.ssm.service.*;
 import com.zking.ssm.util.IdGeneratorUtils;
-import com.zking.ssm.util.PinYinUtil;
 import com.zking.ssm.util.RandomStringTool;
 import com.zking.ssm.util.UUIDUtils;
 import org.apache.commons.lang.time.DateFormatUtils;

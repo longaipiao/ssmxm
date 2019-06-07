@@ -19,8 +19,6 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.deleteByPrimaryKey(oid);
     }
 
-
-
     @Override
     public int insertSelective(Order record) {
         return orderMapper.insertSelective(record);
@@ -46,6 +44,11 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectByUid(uid
         );
     }
+
+//    @Override
+//    public Order selectByTJCX(Integer uid, String oid, String blno, String qyz, String mdz) {
+//        return orderMapper.selectByTJCX(uid,oid,blno,qyz,mdz);
+//    }
 
 
     /**

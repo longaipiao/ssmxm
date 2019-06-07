@@ -187,7 +187,7 @@
                     <tr>
 
                         <th>需要车厢数：</th>
-                        <td><input name="quantity" class="input_reg" type="text" placeholder="请输入需要车厢数"/>
+                        <td><input oninput = "value=value.replace(/[^\d]/g,'')" name="quantity" class="input_reg" type="text" placeholder="请输入需要车厢数"/>
                         </td>
                         <th>备注：</th>
                         <td><input name="snote" class="input_reg" type="text" placeholder="请输入备注"/></td>

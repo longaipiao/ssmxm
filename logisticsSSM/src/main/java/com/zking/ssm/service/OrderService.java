@@ -20,4 +20,6 @@ public interface OrderService {
 
     List<Order> selectByUid(Integer uid);
 
+//    Order selectByTJCX(Integer uid,String oid,String blno,String qyz,String mdz);
+
 }

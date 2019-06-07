@@ -25,6 +25,49 @@
       <result column="pstate" property="pstate"/>
     </association>
 
+
+
+
+<!--  <resultMap id="BaseResultMap2" type="com.zking.ssm.model.Order" >-->
+<!--    <id column="oid" property="oid" jdbcType="VARCHAR" />-->
+<!--    <result column="uid" property="uid" jdbcType="INTEGER" />-->
+<!--    <result column="blno" property="blno" jdbcType="VARCHAR" />-->
+<!--    <result column="credate" property="credate" jdbcType="VARCHAR" />-->
+<!--    <result column="onumber" property="onumber" jdbcType="VARCHAR" />-->
+<!--    <result column="ostate" property="ostate" jdbcType="INTEGER" />-->
+<!--    <result column="lid" property="lid" jdbcType="VARCHAR" />-->
+<!--    <result column="rid" property="rid" jdbcType="VARCHAR" />-->
+<!--    <result column="gid" property="gid" jdbcType="VARCHAR" />-->
+<!--    <result column="sid" property="sid" jdbcType="VARCHAR" />-->
+<!--    <result column="oaddress" property="oaddress" jdbcType="VARCHAR" />-->
+<!--    <result column="thstate" property="thstate" jdbcType="INTEGER" />-->
+<!--    <association property="price" javaType="com.zking.ssm.model.Price">-->
+<!--      <id column="pid" property="pid"/>-->
+<!--      <result column="uid" property="uid"/>-->
+<!--      <result column="pweight" property="pweight"/>-->
+<!--      <result column="landfreight" property="landfreight"/>-->
+<!--      <result column="servicefee" property="servicefee"/>-->
+<!--      <result column="totalmoney" property="totalmoney"/>-->
+<!--      <result column="payment" property="payment"/>-->
+<!--      <result column="pstate" property="pstate"/>-->
+<!--    </association>-->
+<!--    <association property="line" type="com.zking.ssm.model.Line" >-->
+<!--      <id column="lid" property="lid" jdbcType="VARCHAR" />-->
+<!--      <result column="lstart" property="lstart" jdbcType="VARCHAR" />-->
+<!--      <result column="lend" property="lend" jdbcType="VARCHAR" />-->
+<!--      <result column="startdate" property="startdate" jdbcType="VARCHAR" />-->
+<!--      <result column="enddate" property="enddate" jdbcType="VARCHAR" />-->
+<!--      <result column="lnote" property="lnote" jdbcType="VARCHAR" />-->
+<!--      <result column="lweight" property="lweight" jdbcType="INTEGER" />-->
+<!--      <result column="trunksize" property="trunksize" jdbcType="INTEGER" />-->
+<!--      <result column="trains" property="trains" jdbcType="VARCHAR" />-->
+<!--      <result column="lway" property="lway" jdbcType="VARCHAR" />-->
+<!--      <result column="voyage" property="voyage" jdbcType="VARCHAR" />-->
+<!--      <result column="train" property="train" jdbcType="VARCHAR" />-->
+<!--      <result column="lserial" property="lserial" jdbcType="VARCHAR" />-->
+<!--      <result column="lstate" property="lstate" jdbcType="INTEGER" />-->
+<!--    </association>-->
+
   </resultMap>
   <sql id="Base_Column_List" >
     oid, uid, blno, credate, onumber, ostate, pid, lid, oaddress, thstate
@@ -41,7 +84,7 @@
   </delete>
 
   <!--添加订单的方法-->
-  <insert id="insert" parameterType="com.zking.ssm.model.Order">
+  <insert id="insert" parameterType="com.zking.ssm.model.Order" >
     insert into t_order (oid, uid, blno,
       credate, onumber, ostate, 
       pid, rid,gid,sid,lid, oaddress,
@@ -168,9 +211,17 @@
       thstate = #{thstate,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=VARCHAR}
   </update>
+
+
   <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     SELECT a.*,b.* FROM t_order a,t_price b where a.uid = #{uid} and a.pid = b.pid
   </select>
 
+<!--  <select id="selectByTJCX" resultMap="BaseResultMap2">-->
+<!--    select-->
+<!--    a.*,b.*,c.*-->
+<!--    from t_order a,t_line b,t_price c-->
+<!--    where a.lid=b.lid and a.uid = 2 and a.pid = c.pid and a.oid = '201906041606094354098' and a.blno = '201906041606094354099' and b.lstart = '成都' and b.lend = '西安'-->
+<!--  </select>-->
 
 </mapper>

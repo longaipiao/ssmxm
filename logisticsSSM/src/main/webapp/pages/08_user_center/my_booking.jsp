@@ -159,7 +159,7 @@
     <div class="right_con">
         <div class="con_user_r clear" style="min-height:480px;">
             <h2>我的订航单</h2>
-            <form method="post" id="forma" action="/selectOrder">
+            <form method="post" id="forma" action="/selectOrder2">
                 <table class="wrap_user_inp mTop_20">
                     <colgroup>
                         <col width="80px">
@@ -171,15 +171,15 @@
                     </colgroup>
                     <tr>
                         <th>订单号：</th>
-                        <td><input name="ddh" class="input_u" placeholder="订单号"/></td>
+                        <td><input name="ddh" value="${ddh}" class="input_u" placeholder="订单号"/></td>
                         <th>提单号：</th>
-                        <td><input name="tdh" class="input_u" placeholder="提单号"/></td>
+                        <td><input name="tdh" value="${tdh}" class="input_u" placeholder="提单号"/></td>
                     </tr>
                     <tr>
                         <th>起运站：</th>
-                        <td><input name="qyz" class="input_u" placeholder="起运站"/></td>
+                        <td><input name="qyz" value="${qyz}" class="input_u" placeholder="起运站"/></td>
                         <th>目的站：</th>
-                        <td><input name="mdz" class="input_u" placeholder="目的站"/></td>
+                        <td><input name="mdz" value="${mdz}" class="input_u" placeholder="目的站"/></td>
                     </tr>
 
                 </table>

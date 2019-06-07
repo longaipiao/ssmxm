@@ -3,6 +3,7 @@ package com.zking.ssm.controller;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.zking.ssm.model.*;
 import com.zking.ssm.service.OrderService;
+import com.zking.ssm.service.impl.OrderServiceImpl;
 import com.zking.ssm.util.IdGeneratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,7 @@ public class OrderController {
         //获取session对象
         Line line = (Line) session.getAttribute("line");
         Price price = (Price) session.getAttribute("price");
+        System.out.println("price = " + price);
         User user = (User) session.getAttribute("user");
         //收货方id
         String rid = idGeneratorUtils.nextId();
@@ -76,6 +78,8 @@ public class OrderController {
         User user = (User)request.getSession().getAttribute("user");
         List<Order> orders = orderService.selectByUid(2);
 
+//        Order order =orderService.selectByTJCX(1, "", "", "", "");
+//        System.out.println(order);
 
         model.addAttribute("orders",orders);
 
@@ -91,5 +95,16 @@ public class OrderController {
         model.addAttribute("order",order);
 
         return"pages/08_user_center/details_booking.jsp";
+    };
+
+    @RequestMapping("/selectOrder2")
+    public String selectOrder2(HttpServletRequest request, Model model) {
+
+        String oid = request.getParameter("oid");
+        Order order = orderService.selectByPrimaryKey(oid);
+
+        model.addAttribute("orders",order);
+
+        return"pages/08_user_center/my_booking.jsp";
     };
 }

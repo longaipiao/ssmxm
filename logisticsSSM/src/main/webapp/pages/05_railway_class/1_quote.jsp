@@ -184,7 +184,7 @@
                     <li class="title">货物明细</li>
                     <li><b class="b2">总重量(kg):</b>
                         <div class="length_r">
-                            <input id="zl" type="text" onfocus="yanse()" class="input_reg" placeholder="请输入总重量"/>
+                            <input id="zl" type="text" onfocus="yanse()" class="input_reg" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="请输入总重量"/>
                         </div>
                     </li>
                     <li></li>

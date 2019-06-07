@@ -19,8 +19,11 @@ public class Order implements Serializable {
 
     private Price price;
 
-
     private String lid;
+
+    private String oaddress;
+
+    private Integer thstate;
 
     private String sid;
 
@@ -28,12 +31,22 @@ public class Order implements Serializable {
 
     private String gid;
 
-    private String oaddress;
+    private  Line line;
 
-    private Integer thstate;
+    public Line getLine() {
+        return line;
+    }
+
+    public void setLine(Line line) {
+        this.line = line;
+        this.lid = line.getLid();
+    }
 
     private static final long serialVersionUID = 1L;
 
+    public String getPid(){
+        return price.getPid();
+    };
 
 
     public String getOid() {
@@ -166,11 +179,12 @@ public class Order implements Serializable {
                 ", ostate=" + ostate +
                 ", price=" + price +
                 ", lid='" + lid + '\'' +
+                ", oaddress='" + oaddress + '\'' +
+                ", thstate=" + thstate +
                 ", sid='" + sid + '\'' +
                 ", rid='" + rid + '\'' +
                 ", gid='" + gid + '\'' +
-                ", oaddress='" + oaddress + '\'' +
-                ", thstate=" + thstate +
+                ", line=" + line +
                 '}';
     }
 }

@@ -26,4 +26,6 @@ public interface OrderMapper {
      */
     int insert(Order record);
 
+//    Order selectByTJCX(Integer uid,String oid,String blno,String qyz,String mdz);
+
 }
